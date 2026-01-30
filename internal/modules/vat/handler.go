@@ -3,6 +3,7 @@ package vat
 import (
 	"net/http"
 	"proundmhee/internal/infra/di"
+	"proundmhee/internal/shared"
 
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
@@ -33,7 +34,7 @@ func (h *Handler) calc(c *gin.Context) {
 	var req CalcRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
 		h.log.Warn("bad_request", zap.Error(err))
-		c.JSON(http.StatusBadRequest, gin.H{"ok": false, "error": err.Error()})
+		shared.ToFail(c, http.StatusBadRequest, "BAD_REQUEST", err.Error())
 		return
 	}
 	if req.Rate == 0 {
@@ -43,7 +44,7 @@ func (h *Handler) calc(c *gin.Context) {
 	vat, total := h.svc.Calc(req.Amount, req.Rate)
 	h.log.Info("calc", zap.Float64("amount", req.Amount), zap.Float64("rate", req.Rate))
 
-	c.JSON(http.StatusOK, gin.H{
+	shared.ToSuccess(c, gin.H{
 		"ok":     true,
 		"vat":    vat,
 		"total":  total,

@@ -13,11 +13,11 @@ type APIError struct {
 	Message string `json:"message"`
 }
 
-func OK(c *gin.Context, data any) {
+func ToSuccess(c *gin.Context, data any) {
 	c.JSON(200, APIResponse{OK: true, Data: data})
 }
 
-func Fail(c *gin.Context, httpStatus int, code, msg string) {
+func ToFail(c *gin.Context, httpStatus int, code, msg string) {
 	c.JSON(httpStatus, APIResponse{
 		OK: false,
 		Error: &APIError{

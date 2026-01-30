@@ -1,5 +1,9 @@
 # Update log
 
+#### Refactor response handling and update .gitignore for VSCode files
+
+> 30/1/2569 18:00:02
+
 #### Refactor application structure and enhance dependency injection
 
 > 30/1/2569 16:21:22

@@ -23,6 +23,4 @@ go.work.sum
 
 # env file
 .env
-.vscode/*
-.vscode/settings.json
-.vscode/launch.json
+.vscode

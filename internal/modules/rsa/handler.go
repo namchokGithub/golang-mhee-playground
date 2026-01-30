@@ -34,8 +34,8 @@ func (h *Handler) toHex(c *gin.Context) {
 	var req ToHexRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
 		h.log.Warn("bad_request", zap.Error(err))
-		shared.Fail(c, http.StatusBadRequest, "BAD_REQUEST", err.Error())
+		shared.ToFail(c, http.StatusBadRequest, "BAD_REQUEST", err.Error())
 		return
 	}
-	shared.OK(c, gin.H{"hex": h.svc.ToHex(req.Text)})
+	shared.ToSuccess(c, gin.H{"hex": h.svc.ToHex(req.Text)})
 }
