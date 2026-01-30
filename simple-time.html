@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quick Time Copy</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: #f0f2f5;
+        margin: 0;
+      }
+      .card {
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      h1 {
+        color: #1a73e8;
+        margin-bottom: 1.5rem;
+      }
+      .time-display {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        font-family: monospace;
+        color: #333;
+      }
+      button {
+        background-color: #1a73e8;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        font-size: 1rem;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      button:hover {
+        background-color: #1557b0;
+      }
+      .status {
+        margin-top: 1rem;
+        color: #28a745;
+        font-weight: bold;
+        height: 1.2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1>Copy Current Time</h1>
+      <div id="clock" class="time-display">00:00:00</div>
+      <button onclick="copyTime()">Copy Time Now</button>
+      <div id="status" class="status"></div>
+    </div>
+
+    <script>
+      // อัปเดตเวลาบนหน้าจอทุกวินาที
+      function updateClock() {
+        const now = new Date();
+        document.getElementById("clock").innerText =
+          now.toLocaleTimeString("th-TH");
+      }
+      setInterval(updateClock, 1000);
+      updateClock();
+
+      // ฟังก์ชันการ Copy
+      function copyTime() {
+        const now = new Date();
+        // ปรับ Format ตามต้องการ เช่น 2024-05-20 14:30:05
+        const timeString = now.toLocaleString("th-TH");
+
+        navigator.clipboard.writeText(timeString).then(() => {
+          const status = document.getElementById("status");
+          status.innerText = "Copied: " + timeString;
+          setTimeout(() => {
+            status.innerText = "";
+          }, 2000); // หายไปหลังจาก 2 วินาที
+        });
+      }
+    </script>
+  </body>
+</html>

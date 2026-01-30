@@ -21,15 +21,24 @@ proundmhee/
     ├── app/
     │   ├── server.go
     │   └── routes.go
+    ├── infra/
+    │   ├── di/
+    │   │   ├── contracts.go
+    │   │   └── deps.go
+    │   ├── logger/
+    │   │   ├── gin.go
+    │   │   └── logger.go
     ├── shared/
     │   ├── response.go
     │   └── middleware.go
     └── modules/
         ├── vat/
         │   ├── handler.go
+        │   ├── routes.go
         │   └── service.go
         ├── rsa/
         │   ├── handler.go
+        │   ├── routes.go
         │   └── service.go
         │
         └── ... (Another modules)

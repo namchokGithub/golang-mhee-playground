@@ -13,7 +13,11 @@ func main() {
 		port = "8080"
 	}
 
-	r := app.NewServer()
+	r, deps, err := app.NewServer(os.Getenv("APP_ENV"))
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer deps.Log.Sync()
 
 	log.Printf("proundmhee listening on :%s", port)
 	if err := r.Run(":" + port); err != nil {
