@@ -72,6 +72,19 @@ proundmhee/
 
 `curl -s localhost:8080/health`
 
+## Others
+
+#### Testing
+
+- รันทั้งหมด
+  `go test ./...`
+
+- เปิด coverage
+  `go test ./... -cover`
+
+- ล่า race condition
+  `go test ./... -race`
+
 </br>
 
 ---

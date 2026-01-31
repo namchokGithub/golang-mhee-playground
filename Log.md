@@ -1,6 +1,12 @@
 # Update log
 
+#### Add VAT module tests and enhance README with testing instructions
+
+> 31/1/2569 14:39:58
+
 #### Refactor RSA and VAT modules: implement interfaces, enhance error handling, and update service methods
+
+> 31/1/2569 14:03:48
 
 ```
 - Refactor VAT handling to use Calculator interface and update service methods for error handling
