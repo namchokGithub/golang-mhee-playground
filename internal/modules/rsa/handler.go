@@ -12,13 +12,13 @@ import (
 
 type Handler struct {
 	log *zap.Logger
-	svc *Service
+	svc Rsa
 }
 
-func NewHandler(deps *di.Deps) *Handler {
+func NewHandler(deps *di.Deps, svc Rsa) *Handler {
 	return &Handler{
 		log: deps.Logger().Named("vat"),
-		svc: NewService(),
+		svc: svc,
 	}
 }
 
@@ -37,5 +37,13 @@ func (h *Handler) toHex(c *gin.Context) {
 		shared.ToFail(c, http.StatusBadRequest, "BAD_REQUEST", err.Error())
 		return
 	}
-	shared.ToSuccess(c, gin.H{"hex": h.svc.ToHex(req.Text)})
+
+	hex, err := h.svc.ToHex(req.Text, false)
+	if err != nil {
+		h.log.Warn("Internal Server Error", zap.Error(err))
+		shared.ToFail(c, http.StatusInternalServerError, "INTERNAL_SERVER_ERROR", err.Error())
+		return
+	}
+
+	shared.ToSuccess(c, gin.H{"hex": hex})
 }

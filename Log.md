@@ -1,5 +1,12 @@
 # Update log
 
+#### Refactor RSA and VAT modules: implement interfaces, enhance error handling, and update service methods
+
+```
+- Refactor VAT handling to use Calculator interface and update service methods for error handling
+- Refactor RSA module: update service interface, enhance ToHex method, and adjust handler initialization
+```
+
 #### Enhance VAT calculation logic, add RSA key handling, and update .gitignore
 
 > 31/1/2569 12:40:08

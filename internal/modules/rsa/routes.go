@@ -7,6 +7,7 @@ import (
 )
 
 func Register(r *gin.RouterGroup, deps *di.Deps) {
-	h := NewHandler(deps)
+	svc := NewService()
+	h := NewHandler(deps, svc)
 	h.Register(r)
 }

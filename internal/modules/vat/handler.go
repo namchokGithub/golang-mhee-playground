@@ -11,13 +11,13 @@ import (
 
 type Handler struct {
 	log *zap.Logger
-	svc *Service
+	svc Calculator
 }
 
-func NewHandler(deps *di.Deps) *Handler {
+func NewHandler(deps *di.Deps, svc Calculator) *Handler {
 	return &Handler{
 		log: deps.Logger().Named("vat"),
-		svc: NewService(),
+		svc: svc,
 	}
 }
 
@@ -41,7 +41,7 @@ func (h *Handler) calc(c *gin.Context) {
 		req.Rate = 7
 	}
 
-	vat, total := h.svc.Calc(req.Amount, req.Rate)
+	vat, total, _ := h.svc.Calculate(req.Amount, req.Rate)
 	h.log.Info("calc", zap.Float64("amount", req.Amount), zap.Float64("rate", req.Rate))
 
 	shared.ToSuccess(c, gin.H{

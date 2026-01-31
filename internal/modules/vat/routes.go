@@ -7,6 +7,7 @@ import (
 )
 
 func Register(r *gin.RouterGroup, deps *di.Deps) {
-	h := NewHandler(deps)
+	svc := NewService()        // concrete
+	h := NewHandler(deps, svc) // inject ผ่าน interface
 	h.Register(r)
 }
