@@ -1,5 +1,14 @@
 # Update log
 
+#### Enhance VAT calculation logic, add RSA key handling, and update .gitignore
+
+> 31/1/2569 12:40:08
+
+```
+- Implement VAT calculation logic and introduce Calculation struct
+- Add RSA private key and update service to convert PEM to hex and write to file
+```
+
 #### Refactor response handling and update .gitignore for VSCode files
 
 > 30/1/2569 18:00:02
