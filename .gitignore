@@ -25,7 +25,5 @@ go.work.sum
 .env
 .vscode
 
-etc
-
 # Mac
 .DS_Store
