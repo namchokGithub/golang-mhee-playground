@@ -4,7 +4,20 @@
 
 > _Note: Timezone is set to Asia/Bangkok_
 
-#### restructure code generation and refundable date modules
+#### Implement schemaground module for database schema comparison
+
+> 1/2/2569 17:38:19
+
+```
+- Remove unused go.mod and go.sum files from etc/schemaground
+- Add schemaground module with necessary domain, handler, service, and routes
+- Implement database configuration loading and schema comparison logic
+- Create API endpoint for comparing schemas between multiple databases
+- Add tests for handler and service functionalities
+- Include example .env file for database configuration
+```
+
+#### Restructure code generation and refundable date modules
 
 > 1/2/2569 17:18:23
 

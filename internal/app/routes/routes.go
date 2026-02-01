@@ -5,6 +5,7 @@ import (
 	"proundmhee/internal/modules/generate_code"
 	"proundmhee/internal/modules/refundable_date"
 	"proundmhee/internal/modules/rsa"
+	"proundmhee/internal/modules/schemaground"
 	"proundmhee/internal/modules/vat"
 
 	"github.com/gin-gonic/gin"
@@ -17,4 +18,5 @@ func RegisterRoutes(r *gin.Engine, deps *di.Deps) {
 	rsa.Register(api.Group("/rsa"), deps)
 	generate_code.Register(api.Group("/generate"), deps)
 	refundable_date.Register(api.Group("/refundable"), deps)
+	schemaground.Register(api.Group("/schemaground"), deps)
 }
