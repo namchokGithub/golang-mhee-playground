@@ -4,6 +4,10 @@
 
 > _Note: Timezone is set to Asia/Bangkok_
 
+#### Fix update test request path for generate handler
+
+> 1/2/2569 17:42:21
+
 #### Implement schemaground module for database schema comparison
 
 > 1/2/2569 17:38:19

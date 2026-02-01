@@ -54,7 +54,7 @@ func TestHandler_Generate_OK(t *testing.T) {
 	grp := r.Group("/api/generate")
 	h.Register(grp)
 
-	req := httptest.NewRequest(http.MethodGet, "/api/generate/generate", nil)
+	req := httptest.NewRequest(http.MethodGet, "/api/generate", nil)
 	w := httptest.NewRecorder()
 	r.ServeHTTP(w, req)
 
@@ -85,7 +85,7 @@ func TestHandler_Generate_InternalError(t *testing.T) {
 	grp := r.Group("/api/generate")
 	h.Register(grp)
 
-	req := httptest.NewRequest(http.MethodGet, "/api/generate/generate", nil)
+	req := httptest.NewRequest(http.MethodGet, "/api/generate", nil)
 	w := httptest.NewRecorder()
 	r.ServeHTTP(w, req)
 

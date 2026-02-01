@@ -84,13 +84,13 @@ proundmhee/
 #### Testing
 
 - รันทั้งหมด
-  `go test ./...`
+  `go test ./internal/modules/...`
 
 - เปิด coverage
-  `go test ./... -cover`
+  `go test ./internal/modules/... -cover`
 
 - ล่า race condition
-  `go test ./... -race`
+  `go test ./internal/modules/... -race`
 
 </br>
 
