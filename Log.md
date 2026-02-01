@@ -1,5 +1,21 @@
 # Update log
 
+---
+
+> _Note: Timezone is set to Asia/Bangkok_
+
+#### restructure code generation and refundable date modules
+
+> 1/2/2569 17:18:23
+
+```
+- Removed obsolete `compare-columns-database` module and its dependencies.
+- Introduced `generate_code` module with handlers, services, and interfaces for generating various codes.
+- Added `refundable_date` module to check refundable dates with appropriate handlers and services.
+- Implemented unit tests for both `generate_code` and `refundable_date` modules to ensure functionality.
+- Updated main routes to include new modules for code generation and refundable date checks.
+```
+
 #### Add VAT module tests and enhance README with testing instructions
 
 > 31/1/2569 14:39:58
