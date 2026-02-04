@@ -4,9 +4,33 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quick Time Copy</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap"
+      rel="stylesheet" />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😜</text></svg>" />
     <style>
       body {
-        font-family: sans-serif;
+        font-family: "Google Sans", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-style: normal;
+        font-variation-settings: "GRAD" 0;
+        /* font-family: sans-serif; */
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -26,6 +50,10 @@
         color: #1a73e8;
         margin-bottom: 1.5rem;
       }
+      h4 {
+        color: #00b2f8;
+        margin-bottom: 3rem;
+      }
       .time-display {
         font-size: 2rem;
         font-weight: bold;
@@ -37,7 +65,7 @@
         background-color: #1a73e8;
         color: white;
         border: none;
-        padding: 12px 24px;
+        padding: 12px 12px;
         font-size: 1rem;
         border-radius: 6px;
         cursor: pointer;
@@ -55,36 +83,114 @@
     </style>
   </head>
   <body>
-    <div class="card">
-      <h1>Copy Current Time</h1>
-      <div id="clock" class="time-display">00:00:00</div>
-      <button onclick="copyTime()">Copy Time Now</button>
-      <div id="status" class="status"></div>
+    <div class="card mb-3">
+      <div class="">
+        <h1>คัดลอกเวลา อิอิ 😜</h1>
+        <div id="date" class="time-display"></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card mb-3">
+          <div class="card-body">
+            <h4>4/2/2569 17:09:46 UTC +7</h4>
+            <button onclick="copyTime(1)">Copy Time Now</button>
+            <div id="status1" class="status"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card mb-3">
+          <div class="card-body">
+            <h4>2026/02/04 5:09:23 PM UTC +7</h4>
+            <button onclick="copyTime(2)">Copy Time Now</button>
+            <div id="status2" class="status"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card mb-3">
+          <div class="card-body">
+            <h4>04/02/2026 17:06:51 UTC +7</h4>
+            <button onclick="copyTime(3)">Copy Time Now</button>
+            <div id="status3" class="status"></div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script>
-      // อัปเดตเวลาบนหน้าจอทุกวินาที
-      function updateClock() {
+      function currentDate() {
         const now = new Date();
-        document.getElementById("clock").innerText =
-          now.toLocaleTimeString("th-TH");
+        document.getElementById("date").innerText = now.toLocaleString(
+          "th-TH",
+          {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: false,
+          },
+        );
       }
-      setInterval(updateClock, 1000);
-      updateClock();
+
+      currentDate();
+      setInterval(function () {
+        currentDate();
+      }, 1000);
 
       // ฟังก์ชันการ Copy
-      function copyTime() {
+      function copyTime(id) {
         const now = new Date();
         // ปรับ Format ตามต้องการ เช่น 2024-05-20 14:30:05
-        const timeString = now.toLocaleString("th-TH");
-
+        const timeString = generateTime(id);
+        eleID = "status" + id;
         navigator.clipboard.writeText(timeString).then(() => {
-          const status = document.getElementById("status");
+          const status = document.getElementById(eleID);
           status.innerText = "Copied: " + timeString;
           setTimeout(() => {
             status.innerText = "";
           }, 2000); // หายไปหลังจาก 2 วินาที
         });
+      }
+
+      function generateTime(pattern) {
+        const now = new Date();
+
+        // ดึงข้อมูลเวลา
+        const year = now.getFullYear();
+        const yearTH = year + 543; // พ.ศ.
+        const month = (now.getMonth() + 1).toString().padStart(2, "0");
+        const day = now.getDate().toString().padStart(2, "0");
+        const hours = now.getHours().toString().padStart(2, "0");
+        const minutes = now.getMinutes().toString().padStart(2, "0");
+        const seconds = now.getSeconds().toString().padStart(2, "0");
+
+        // สำหรับ 12 ชั่วโมง
+        const hours12 = (now.getHours() % 12 || 12).toString();
+        const ampm = now.getHours() >= 12 ? "PM" : "AM";
+
+        // Timezone offset
+        const offset = now.getTimezoneOffset();
+        const offsetHours = Math.abs(Math.floor(offset / 60));
+        const sign = offset <= 0 ? "+" : "-";
+        const timezone = `UTC ${sign}${offsetHours}`;
+
+        switch (pattern) {
+          case 1:
+            return `${parseInt(day)}/${parseInt(month)}/${yearTH} ${hours}:${minutes}:${seconds} ${timezone}`; // Pattern 1: 4/2/2569 17:01:03 UTC +7
+          case 2:
+            return `${year}/${month}/${day} ${hours12}:${minutes}:${seconds} ${ampm} ${timezone}`; // Pattern 2: 2026/02/04 5:01:03 PM UTC +7
+          case 3:
+            return `${day}/${month}/${year} ${hours}:${minutes}:${seconds} ${timezone}`; // Pattern 3: 04/02/2026 17:01:03 UTC +7
+          default:
+            return "Invalid pattern";
+        }
       }
     </script>
   </body>
